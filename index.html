@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Báo Cáo Kiến Tập - Nguyễn Trung Tiến - FPT Software HCM</title>
+    <title>Báo Cáo Kiến Tập - Nguyễn Trung Tiến - FPT Software HCM (Theo Hướng Dẫn)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Visualization & Content Choices:
-        - Report Info: FPT Software Overview (Global & HCM employee numbers) -> Goal: Compare -> Viz: Bar Chart (Chart.js) -> Interaction: Static display -> Justification: Clear visual comparison of scale -> Library: Chart.js.
-        - Report Info: Internship Schedule/Content -> Goal: Inform/Organize -> Presentation: Accordion/Interactive Cards (HTML/Tailwind/JS) -> Interaction: Click to expand/reveal details -> Justification: Organizes detailed content concisely, user-controlled exploration.
-        - Report Info: Technologies Learned (Agile, DevOps, Cloud, AI, RPA, Blockchain) -> Goal: Inform/Highlight -> Presentation: Interactive Cards (HTML/Tailwind/JS) -> Interaction: Click to show details/summary for each tech -> Justification: Engages user, presents key learnings clearly.
-        - Report Info: Skills Developed -> Goal: Inform -> Presentation: Styled List (HTML/Tailwind) -> Interaction: Static display -> Justification: Clear and direct presentation for qualitative data.
-        - Report Info: Career Path/Learning Plan -> Goal: Inform/Organize -> Presentation: Visual Timeline/Roadmap (HTML/Tailwind) -> Interaction: Static display -> Justification: Visually represents progression.
-        - Report Info: General textual content (Introductions, Company Details, Objectives, Reflections, Proposals) -> Goal: Inform/Explain -> Presentation: Structured Text Blocks (HTML/Tailwind) -> Interaction: Static display -> Justification: Standard way to present narrative information.
+        - Report Info: Cover Page (User's info, FPT Software HCM) -> Goal: Identify -> Presentation: Styled Hero Section (HTML/Tailwind) -> Interaction: Static -> Justification: Standard report cover.
+        - Report Info: Table of Contents -> Goal: Navigate -> Presentation: Top Navigation Bar (HTML/Tailwind/JS) -> Interaction: Click to scroll -> Justification: Easy navigation for SPA.
+        - Report Info: FPT Software Overview (Global & HCM employee numbers) -> Goal: Inform/Compare -> Viz: Bar Chart (Chart.js) -> Interaction: Static display -> Justification: Clear visual comparison of scale for 'Giới Thiệu Doanh Nghiệp'.
+        - Report Info: Internship Objectives/Learnings/Challenges/Suggestions -> Goal: Inform/Detail -> Presentation: Structured Text Blocks, Accordions for detailed lists (HTML/Tailwind/JS) -> Interaction: Click to expand -> Justification: Organizes detailed content concisely.
+        - Report Info: Career Path/Learning Plan -> Goal: Inform/Organize -> Presentation: Visual Timeline/Roadmap (HTML/Tailwind) -> Interaction: Static display -> Justification: Visually represents progression in 'Mục Tiêu & Định Hướng'.
         - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', sans-serif; /* Using Inter as a professional sans-serif font */
         }
         .smooth-scroll {
             scroll-behavior: smooth;
         }
         .nav-link {
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent;
         }
         .nav-link.active, .nav-link:hover {
-            color: #0D9488; 
-            font-weight: 600;
+            color: #0D9488; /* Teal-600 */
+            border-bottom-color: #0D9488; /* Teal-600 */
         }
         .card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -36,9 +36,10 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
         .section-title {
-            border-bottom: 2px solid #0D9488; 
-            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #0D9488; /* Teal-600 */
+            padding-bottom: 0.75rem;
             display: inline-block;
+            font-weight: 700;
         }
         .accordion-content {
             max-height: 0;
@@ -48,389 +49,272 @@
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
+            max-width: 600px; /* Max width for readability */
             margin-left: auto;
             margin-right: auto;
-            height: 300px;
-            max-height: 400px;
+            height: 300px; /* Base height */
+            max-height: 400px; /* Max height */
         }
-        @media (min-width: 768px) {
+        @media (min-width: 768px) { /* Medium screens and up */
             .chart-container {
                 height: 350px;
             }
         }
-        .tag {
-            background-color: #CCFBF1; 
-            color: #115E59; 
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 500;
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -29px; /* Adjust based on line and circle size */
+            top: 0;
+            width: 18px;
+            height: 18px;
+            background-color: #0D9488; /* Teal-600 */
+            border-radius: 50%;
+            border: 3px solid #F0F9F9; /* Teal-50 for contrast */
+            z-index: 1;
         }
     </style>
 </head>
 <body class="bg-stone-100 text-neutral-700 smooth-scroll">
 
-    <header class="bg-white shadow-md sticky top-0 z-50">
+    <header class="bg-white shadow-lg sticky top-0 z-50">
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
+            <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
-                    <a href="#home" class="text-2xl font-bold text-teal-600">Nguyễn Trung Tiến</a>
+                    <a href="#trang-bia" class="text-2xl font-bold text-teal-600 hover:text-teal-700 transition-colors">Báo Cáo Kiến Tập</a>
                 </div>
                 <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#home" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-neutral-700">Trang Chủ</a>
-                        <a href="#fpt-software" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-neutral-700">Về FPT Software</a>
-                        <a href="#internship-experience" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-neutral-700">Trải Nghiệm Kiến Tập</a>
-                        <a href="#future-orientation" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-neutral-700">Định Hướng Tương Lai</a>
-                        <a href="#evaluation-proposals" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-neutral-700">Đánh Giá & Đề Xuất</a>
+                    <div class="ml-10 flex items-baseline space-x-3 lg:space-x-4">
+                        <a href="#loi-noi-dau" class="nav-link px-2 py-2 rounded-md text-sm font-medium">Lời Nói Đầu</a>
+                        <a href="#gioi-thieu-dn" class="nav-link px-2 py-2 rounded-md text-sm font-medium">Giới Thiệu DN</a>
+                        <a href="#muc-tieu-dinh-huong" class="nav-link px-2 py-2 rounded-md text-sm font-medium">Mục Tiêu & Định Hướng</a>
+                        <a href="#hoc-hoi-kinh-nghiem" class="nav-link px-2 py-2 rounded-md text-sm font-medium">Học Hỏi & KN</a>
+                        <a href="#thach-thuc" class="nav-link px-2 py-2 rounded-md text-sm font-medium">Thách Thức</a>
+                        <a href="#de-xuat" class="nav-link px-2 py-2 rounded-md text-sm font-medium">Đề Xuất</a>
+                        <a href="#phan-hoi-danh-gia" class="nav-link px-2 py-2 rounded-md text-sm font-medium">Phản Hồi & ĐG</a>
+                        <a href="#ket-luan" class="nav-link px-2 py-2 rounded-md text-sm font-medium">Kết Luận</a>
                     </div>
                 </div>
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-button" class="bg-white inline-flex items-center justify-center p-2 rounded-md text-neutral-400 hover:text-teal-600 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500" aria-controls="mobile-menu" aria-expanded="false">
+                    <button type="button" id="mobile-menu-button" class="bg-white inline-flex items-center justify-center p-2 rounded-md text-neutral-500 hover:text-teal-600 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500" aria-controls="mobile-menu" aria-expanded="false">
                         <span class="sr-only">Mở menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                 </div>
             </div>
         </nav>
         <div class="md:hidden hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#home" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-neutral-700">Trang Chủ</a>
-                <a href="#fpt-software" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-neutral-700">Về FPT Software</a>
-                <a href="#internship-experience" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-neutral-700">Trải Nghiệm Kiến Tập</a>
-                <a href="#future-orientation" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-neutral-700">Định Hướng Tương Lai</a>
-                <a href="#evaluation-proposals" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-neutral-700">Đánh Giá & Đề Xuất</a>
+                <a href="#loi-noi-dau" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Lời Nói Đầu</a>
+                <a href="#gioi-thieu-dn" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Giới Thiệu DN</a>
+                <a href="#muc-tieu-dinh-huong" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Mục Tiêu & Định Hướng</a>
+                <a href="#hoc-hoi-kinh-nghiem" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Học Hỏi & KN</a>
+                <a href="#thach-thuc" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Thách Thức</a>
+                <a href="#de-xuat" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Đề Xuất</a>
+                <a href="#phan-hoi-danh-gia" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Phản Hồi & ĐG</a>
+                <a href="#ket-luan" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Kết Luận</a>
             </div>
         </div>
     </header>
 
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center py-12">
-            <div class="max-w-3xl">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-neutral-800">Báo Cáo Kiến Tập</h1>
-                <p class="mt-4 text-xl sm:text-2xl text-teal-600 font-semibold">Công ty TNHH Phần Mềm FPT – Chi nhánh TP. Hồ Chí Minh</p>
-                <p class="mt-6 text-lg text-neutral-600">
-                    Chào mừng đến với báo cáo kiến tập tương tác của Nguyễn Trung Tiến (Lớp 23CT113, MSSV: 123000127), sinh viên Khoa Công nghệ Thông tin, Trường Đại học Lạc Hồng. Báo cáo này tổng kết quá trình kiến tập, những kiến thức thu nhận được và định hướng phát triển sau kỳ thực tập ý nghĩa tại FPT Software HCM.
-                </p>
-                <p class="mt-4 text-md text-neutral-500">Đồng Nai, Tháng 03 Năm 2025</p>
-                <a href="#fpt-software" class="mt-8 inline-block bg-teal-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-teal-700 transition duration-300">Khám Phá Ngay</a>
+        
+        <section id="trang-bia" class="min-h-screen flex flex-col justify-center items-center text-center py-12 bg-gradient-to-br from-teal-600 to-sky-700 text-white rounded-xl shadow-2xl mb-16">
+            <div class="max-w-3xl p-8">
+                <p class="text-xl font-light">TRƯỜNG ĐẠI HỌC LẠC HỒNG</p>
+                <p class="text-2xl font-semibold">KHOA CÔNG NGHỆ THÔNG TIN</p>
+                <div class="w-24 h-1 bg-white mx-auto my-6"></div>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold my-6">BÁO CÁO KIẾN TẬP</h1>
+                <p class="text-lg font-light mt-4">Công ty:</p>
+                <p class="text-2xl sm:text-3xl font-semibold mb-6">CÔNG TY TNHH PHẦN MỀM FPT – CHI NHÁNH TP. HỒ CHÍ MINH (FPT SOFTWARE HCM)</p>
+                
+                <div class="mt-8 text-lg leading-relaxed">
+                    <p>Sinh viên thực hiện: <span class="font-semibold">NGUYỄN TRUNG TIẾN</span></p>
+                    <p>Lớp: <span class="font-semibold">23CT113</span></p>
+                    <p>Mã sinh viên: <span class="font-semibold">123000127</span></p>
+                </div>
+                
+                <p class="mt-12 text-lg font-light">ĐỒNG NAI, THÁNG 03 NĂM 2025</p>
             </div>
         </section>
 
-        <section id="fpt-software" class="py-16">
-            <h2 class="section-title text-3xl font-bold text-neutral-800 mb-12 text-center">Về FPT Software HCM</h2>
-            <p class="text-center text-lg text-neutral-600 mb-12 max-w-3xl mx-auto">
-                Phần này cung cấp thông tin tổng quan về Tập đoàn FPT, công ty FPT Software và chi nhánh FPT Software HCM - nơi diễn ra kỳ kiến tập. Bạn sẽ hiểu rõ hơn về lịch sử hình thành, quy mô, các lĩnh vực hoạt động chính và văn hóa doanh nghiệp đặc trưng của FPT.
-            </p>
-            <div class="space-y-12">
-                <div class="card bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-semibold text-teal-700 mb-4">1.1 Tổng quan về Tập đoàn FPT và Công ty FPT Software</h3>
-                    <p class="mb-2"><strong>Tập đoàn FPT:</strong> Thành lập năm 1988, là tập đoàn công nghệ hàng đầu Việt Nam, hoạt động trong các lĩnh vực Công nghệ, Viễn thông, Giáo dục. FPT có uy tín trên thị trường trong và ngoài nước.</p>
-                    <p><strong>FPT Software:</strong> Thành lập năm 1999, là công ty thành viên chủ chốt, dẫn đầu về xuất khẩu phần mềm, đóng vai trò quan trọng trong chiến lược toàn cầu hóa của FPT.</p>
-                </div>
+        <section id="loi-noi-dau" class="py-16">
+            <h2 class="section-title text-3xl text-neutral-800 mb-10 text-center">Lời Nói Đầu</h2>
+            <div class="card bg-white p-8 rounded-xl shadow-lg max-w-4xl mx-auto text-lg leading-relaxed">
+                <p class="mb-4">Trong chương trình đào tạo của khoa Công nghệ Thông tin, Trường Đại học Lạc Hồng, em đã có cơ hội tham gia chương trình kiến tập tại Công ty TNHH Phần mềm FPT – Chi nhánh TP. Hồ Chí Minh (FPT Software HCM). Đây là một trong những công ty phần mềm hàng đầu tại Việt Nam, nổi tiếng với môi trường làm việc sáng tạo, chuyên nghiệp và ứng dụng nhiều công nghệ tiên tiến trong lĩnh vực phát triển phần mềm.</p>
+                <p class="mb-4">Mục tiêu học tập của em khi tham gia vào buổi kiến tập này là tìm hiểu rõ hơn về cách thức phát triển phần mềm thực tế, đặc biệt là việc sử dụng các phương pháp quản lý dự án hiện đại như Agile và Scrum. Đồng thời, em mong muốn cải thiện kỹ năng lập trình, kỹ năng làm việc nhóm (teamwork) cũng như các kỹ năng tương tác chuyên nghiệp trong môi trường doanh nghiệp.</p>
+                <p>Báo cáo này trình bày chi tiết quá trình tham gia kỳ kiến tập tại FPT Software HCM, qua đó mô tả những kinh nghiệm, kiến thức và kỹ năng mà em đã học hỏi và tích lũy được sau một quãng thời gian quan trọng này. Hy vọng rằng qua báo cáo, em có thể nhìn nhận rõ hơn về định hướng nghề nghiệp của mình và có những bước chuẩn bị vững chắc cho con đường phát triển sự nghiệp trong tương lai.</p>
+            </div>
+        </section>
 
+        <section id="gioi-thieu-dn" class="py-16 bg-teal-50/50">
+            <h2 class="section-title text-3xl text-neutral-800 mb-10 text-center">Giới Thiệu Doanh Nghiệp</h2>
+            <p class="text-center text-lg text-neutral-600 mb-12 max-w-3xl mx-auto">
+                Phần này cung cấp thông tin chi tiết về Công ty TNHH Phần mềm FPT – Chi nhánh TP. Hồ Chí Minh, bao gồm lịch sử hình thành, cơ cấu tổ chức, quy mô, các lĩnh vực hoạt động chính và những đóng góp của công ty cho xã hội.
+            </p>
+            <div class="space-y-10 max-w-4xl mx-auto">
                 <div class="card bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-semibold text-teal-700 mb-4">1.2 Giới thiệu chi tiết về FPT Software HCM</h3>
-                    <ul class="list-disc list-inside space-y-2">
+                    <h3 class="text-2xl font-semibold text-teal-700 mb-4">Thông tin chung về FPT Software HCM</h3>
+                    <ul class="list-disc list-inside space-y-2 text-lg">
                         <li><strong>Tên đầy đủ:</strong> Công ty TNHH Phần mềm FPT – Chi nhánh TP. Hồ Chí Minh</li>
-                        <li><strong>Địa chỉ:</strong> Lô T2, đường D1, Khu Công nghệ Cao, P. Tân Phú, TP. Thủ Đức, TP. HCM</li>
-                        <li><strong>Năm thành lập chi nhánh:</strong> Hoạt động từ 2004-2005</li>
-                        <li><strong>Quy mô nhân sự:</strong> FPT Software toàn cầu có trên 27.000 nhân viên, chi nhánh HCM hơn 4.000 nhân viên.</li>
+                        <li><strong>Tên tiếng Anh:</strong> FPT Software Co., Ltd. – Ho Chi Minh Branch</li>
+                        <li><strong>Địa chỉ trụ sở:</strong> Lô T2, đường D1, Khu Công nghệ Cao, Phường Tân Phú, Thành phố Thủ Đức, TP. Hồ Chí Minh, Việt Nam.</li>
+                        <li><strong>Điện thoại:</strong> (028) 73003191</li>
+                        <li><strong>Giám đốc chi nhánh (tham khảo):</strong> Ông Phạm Minh Tuấn</li>
+                        <li><strong>Năm thành lập (FPT Software):</strong> 1999. Chi nhánh TP.HCM hoạt động từ khoảng năm 2004-2005.</li>
+                        <li><strong>Quốc gia đầu tư:</strong> Việt Nam</li>
+                        <li><strong>Loại hình doanh nghiệp:</strong> Công ty trách nhiệm hữu hạn ngoài nhà nước (thuộc Tập đoàn FPT).</li>
+                        <li><strong>Chủ đầu tư:</strong> Tập đoàn FPT.</li>
+                        <li><strong>Quy mô:</strong> FPT Software có trên 27.000 nhân viên toàn cầu, chi nhánh HCM có hơn 4.000 nhân viên.</li>
+                        <li><strong>Đóng góp cho xã hội:</strong> Tạo nhiều việc làm cho sinh viên CNTT, tham gia các dự án chuyển đổi số cho Chính phủ và doanh nghiệp lớn, đóng góp các quỹ học bổng, phát triển nhân tài trẻ.</li>
                     </ul>
                     <div class="mt-6">
-                        <h4 class="text-lg font-semibold text-neutral-800 mb-2">Quy Mô Nhân Sự (Minh Họa)</h4>
+                        <h4 class="text-xl font-semibold text-neutral-800 mb-3 text-center">Quy Mô Nhân Sự (Minh Họa)</h4>
                         <div class="chart-container">
                             <canvas id="employeeChart"></canvas>
                         </div>
-                        <p class="text-sm text-neutral-500 mt-2 text-center">Biểu đồ thể hiện quy mô nhân sự tương đối giữa FPT Software toàn cầu và chi nhánh HCM.</p>
                     </div>
                 </div>
-
                 <div class="card bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-semibold text-teal-700 mb-4">1.3 Lĩnh vực hoạt động và sản phẩm/dịch vụ chính</h3>
-                    <p class="mb-3">FPT Software HCM hoạt động trong nhiều lĩnh vực công nghệ tiên tiến:</p>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <h4 class="font-semibold text-neutral-800">Lĩnh vực chính:</h4>
-                            <ul class="list-disc list-inside space-y-1 mt-2">
-                                <li>Xuất khẩu phần mềm và Dịch vụ Công nghệ</li>
-                                <li>Phát triển Sản phẩm Công nghệ số (akaSuite)</li>
-                                <li>Chuyển đổi số (Cloud, Big Data, AI, IoT)</li>
-                                <li>Dịch vụ Doanh nghiệp (ERP, CRM)</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-neutral-800">Sản phẩm nổi bật (akaSuite):</h4>
-                            <ul class="list-disc list-inside space-y-1 mt-2">
-                                <li>akaBot (RPA)</li>
-                                <li>akaChain (Blockchain)</li>
-                                <li>akaMES (Quản lý sản xuất)</li>
-                            </ul>
-                        </div>
-                    </div>
-                     <p class="mt-3"><strong>Các ngành nghề phục vụ:</strong> Tài chính – Ngân hàng, Viễn thông, Sản xuất Công nghiệp, Dịch vụ công, Y tế, Logistics, Bán lẻ.</p>
-                </div>
-
-                <div class="card bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-semibold text-teal-700 mb-4">1.4 Môi trường làm việc và văn hóa doanh nghiệp</h3>
-                    <p class="mb-2">Môi trường làm việc tại FPT Software trẻ trung, năng động, sáng tạo và chuyên nghiệp. Nhân viên được khuyến khích phát triển bản thân, học hỏi công nghệ mới.</p>
-                    <p class="mb-2">Văn hóa "STCo" (Sáng tác Company) độc đáo và triết lý "Chơi mà học – Học mà vui" được đề cao, tạo động lực cho sự phát triển toàn diện.</p>
-                    <p>Công ty chú trọng phát triển con người, cung cấp lộ trình sự nghiệp rõ ràng và nhiều cơ hội đào tạo.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="internship-experience" class="py-16 bg-teal-50/50">
-            <h2 class="section-title text-3xl font-bold text-neutral-800 mb-12 text-center">Trải Nghiệm Kiến Tập</h2>
-            <p class="text-center text-lg text-neutral-600 mb-12 max-w-3xl mx-auto">
-                Khám phá chi tiết về kỳ kiến tập tại FPT Software HCM: từ mục tiêu đặt ra, nội dung và lịch trình kiến tập, cho đến những kiến thức chuyên môn và công nghệ đã tiếp thu, cùng các kỹ năng quan trọng được phát triển.
-            </p>
-            <div class="space-y-12">
-                <div class="card bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-semibold text-teal-700 mb-4">2.1 Mục tiêu kiến tập</h3>
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>Tìm hiểu quy trình phát triển phần mềm chuyên nghiệp (Agile/Scrum).</li>
-                        <li>Tiếp cận công nghệ mới: Cloud, AI, Big Data, RPA, DevOps.</li>
-                        <li>Hiểu rõ vai trò các vị trí trong đội ngũ phát triển.</li>
-                        <li>Nâng cao kỹ năng mềm: giao tiếp, làm việc nhóm, quản lý thời gian.</li>
-                        <li>Rèn luyện khả năng tự học, tự nghiên cứu.</li>
-                        <li>Củng cố và điều chỉnh định hướng nghề nghiệp.</li>
+                    <h3 class="text-2xl font-semibold text-teal-700 mb-4">Lĩnh Vực Sản Xuất (Hoạt Động Chính)</h3>
+                    <p class="text-lg mb-3">FPT Software hoạt động trong nhiều lĩnh vực công nghệ tiên tiến, cung cấp các giải pháp và dịch vụ đa dạng:</p>
+                    <ul class="list-disc list-inside space-y-2 text-lg">
+                        <li><strong>Xuất khẩu phần mềm và dịch vụ công nghệ:</strong> Cho doanh nghiệp toàn cầu (Nhật Bản, Mỹ, Châu Âu, APAC).</li>
+                        <li><strong>Phát triển sản phẩm công nghệ số (akaSuite):</strong> Bao gồm akaBot (RPA), akaChain (Blockchain), akaMES, akaAT, akaCam.</li>
+                        <li><strong>Triển khai hệ thống chuyển đổi số:</strong> Trên nền tảng điện toán đám mây (Cloud), dữ liệu lớn (Big Data), Trí tuệ nhân tạo (AI), Internet of Things (IoT).</li>
+                        <li><strong>Tư vấn và phát triển ERP, CRM:</strong> Và các hệ thống quản lý doanh nghiệp khác.</li>
+                        <li><strong>Các ngành phục vụ chính:</strong> Tài chính ngân hàng, Viễn thông, Công nghiệp xe hơi, Dịch vụ công, Y tế, Logistics.</li>
                     </ul>
                 </div>
-
-                <div class="card bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-semibold text-teal-700 mb-4">2.2 Nội dung và lịch trình kiến tập (Các hoạt động chính)</h3>
-                     <div id="internship-schedule-accordion" class="space-y-4">
-                        <div class="accordion-item border border-neutral-200 rounded-lg">
-                            <button class="accordion-header w-full flex justify-between items-center p-4 text-left font-medium text-neutral-700 hover:bg-neutral-50 focus:outline-none">
-                                <span>Buổi giới thiệu tổng quan (Orientation Day)</span>
-                                <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                            </button>
-                            <div class="accordion-content p-4 border-t border-neutral-200 bg-white">
-                                <p>Giới thiệu về Tập đoàn FPT, FPT Software, chi nhánh HCM. Phổ biến văn hóa doanh nghiệp, quy định và cơ hội phát triển.</p>
-                            </div>
-                        </div>
-                        <div class="accordion-item border border-neutral-200 rounded-lg">
-                            <button class="accordion-header w-full flex justify-between items-center p-4 text-left font-medium text-neutral-700 hover:bg-neutral-50 focus:outline-none">
-                                <span>Tham quan thực tế (Company Tour)</span>
-                                 <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                            </button>
-                            <div class="accordion-content p-4 border-t border-neutral-200 bg-white">
-                                <p>Tham quan khuôn viên F-Town, văn phòng, tiện ích. Quan sát môi trường làm việc và cách tổ chức công ty.</p>
-                            </div>
-                        </div>
-                        <div class="accordion-item border border-neutral-200 rounded-lg">
-                            <button class="accordion-header w-full flex justify-between items-center p-4 text-left font-medium text-neutral-700 hover:bg-neutral-50 focus:outline-none">
-                                <span>Các buổi chia sẻ chuyên đề (Technical Seminars/Workshops)</span>
-                                 <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                            </button>
-                            <div class="accordion-content p-4 border-t border-neutral-200 bg-white">
-                                <ul class="list-disc list-inside space-y-1">
-                                    <li>Quy trình phát triển phần mềm Agile/Scrum.</li>
-                                    <li>Công nghệ mới: DevOps, Cloud Computing, AI & RPA, Blockchain.</li>
-                                    <li>Chia sẻ từ các dự án thực tế.</li>
-                                    <li>Định hướng nghề nghiệp.</li>
-                                </ul>
-                            </div>
-                        </div>
-                         <div class="accordion-item border border-neutral-200 rounded-lg">
-                            <button class="accordion-header w-full flex justify-between items-center p-4 text-left font-medium text-neutral-700 hover:bg-neutral-50 focus:outline-none">
-                                <span>Hoạt động tương tác và hỏi đáp (Q&A Sessions)</span>
-                                 <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                            </button>
-                            <div class="accordion-content p-4 border-t border-neutral-200 bg-white">
-                                <p>Cơ hội đặt câu hỏi trực tiếp cho diễn giả, chuyên gia để làm rõ thắc mắc về công nghệ, quy trình, văn hóa làm việc.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-semibold text-teal-700 mb-6">3.1 Kiến thức chuyên môn và công nghệ tiếp thu</h3>
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="tech-card p-6 bg-teal-50 rounded-lg hover:shadow-md cursor-pointer" data-tech-details="Hiểu rõ về các buổi lễ (ceremonies) như Daily Scrum, Sprint Planning, Sprint Review, Sprint Retrospective và tầm quan trọng của giao tiếp liên tục, minh bạch. Nhận thấy sự linh hoạt và khả năng thích ứng nhanh của Agile.">
-                            <h4 class="font-semibold text-neutral-800 text-lg">Agile/Scrum</h4>
-                            <p class="text-sm text-neutral-600 mt-1">Quy trình phát triển phần mềm linh hoạt.</p>
-                        </div>
-                        <div class="tech-card p-6 bg-teal-50 rounded-lg hover:shadow-md cursor-pointer" data-tech-details="Ấn tượng với cách FPT Software tích hợp DevOps, tự động hóa nhiều khâu từ phát triển, kiểm thử đến triển khai (CI/CD), nâng cao tốc độ và chất lượng sản phẩm.">
-                            <h4 class="font-semibold text-neutral-800 text-lg">DevOps & CI/CD</h4>
-                            <p class="text-sm text-neutral-600 mt-1">Tự động hóa phát triển và triển khai.</p>
-                        </div>
-                        <div class="tech-card p-6 bg-teal-50 rounded-lg hover:shadow-md cursor-pointer" data-tech-details="Hiểu tầm quan trọng và lợi ích của nền tảng đám mây (AWS, Azure) trong xây dựng và vận hành ứng dụng hiện đại, khả năng mở rộng và tối ưu chi phí.">
-                            <h4 class="font-semibold text-neutral-800 text-lg">Cloud Computing</h4>
-                            <p class="text-sm text-neutral-600 mt-1">Nền tảng đám mây (AWS, Azure).</p>
-                        </div>
-                        <div class="tech-card p-6 bg-teal-50 rounded-lg hover:shadow-md cursor-pointer" data-tech-details="Sản phẩm akaBot cho thấy tiềm năng của AI và RPA trong giải quyết bài toán doanh nghiệp, tiết kiệm thời gian và nguồn lực.">
-                            <h4 class="font-semibold text-neutral-800 text-lg">AI & RPA</h4>
-                            <p class="text-sm text-neutral-600 mt-1">Trí tuệ nhân tạo và Tự động hóa.</p>
-                        </div>
-                        <div class="tech-card p-6 bg-teal-50 rounded-lg hover:shadow-md cursor-pointer" data-tech-details="Qua giới thiệu về akaChain, có cái nhìn ban đầu về ứng dụng Blockchain trong tăng cường tính minh bạch và bảo mật.">
-                            <h4 class="font-semibold text-neutral-800 text-lg">Blockchain</h4>
-                            <p class="text-sm text-neutral-600 mt-1">Công nghệ chuỗi khối.</p>
-                        </div>
-                        <div class="tech-card p-6 bg-teal-50 rounded-lg hover:shadow-md cursor-pointer" data-tech-details="Phân biệt rõ nhiệm vụ và trách nhiệm của Product Owner, Scrum Master, Developer, Tester/QA, Business Analyst và sự phối hợp cần thiết.">
-                            <h4 class="font-semibold text-neutral-800 text-lg">Vai trò trong dự án</h4>
-                            <p class="text-sm text-neutral-600 mt-1">Nhiệm vụ các vị trí (PO, SM, Dev, Test, BA).</p>
-                        </div>
-                    </div>
-                </div>
-                <div id="tech-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
-                    <div class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full">
-                        <h3 id="modal-title" class="text-2xl font-semibold text-teal-700 mb-4"></h3>
-                        <p id="modal-details" class="text-neutral-600 mb-6"></p>
-                        <button id="close-modal-button" class="bg-teal-600 text-white py-2 px-4 rounded-lg hover:bg-teal-700 transition duration-300">Đóng</button>
-                    </div>
-                </div>
-
-                <div class="card bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-semibold text-teal-700 mb-4">3.2 Kỹ năng phát triển được</h3>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <h4 class="font-semibold text-neutral-800">Kỹ năng mềm:</h4>
-                            <ul class="list-disc list-inside space-y-1 mt-2">
-                                <li>Giao tiếp hiệu quả</li>
-                                <li>Nhận thức về làm việc nhóm</li>
-                                <li>Quản lý thời gian và tự học</li>
-                                <li>Tư duy phản biện và giải quyết vấn đề</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-neutral-800">Kỹ năng chuyên môn:</h4>
-                            <ul class="list-disc list-inside space-y-1 mt-2">
-                                <li>Quan sát và phân tích môi trường doanh nghiệp</li>
-                                <li>Ghi chép thông tin hệ thống</li>
-                                <li>Hiểu biết cơ bản về các công nghệ mới</li>
-                            </ul>
-                        </div>
-                    </div>
+                 <div class="card bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold text-teal-700 mb-4">Môi trường làm việc và văn hóa doanh nghiệp</h3>
+                    <p class="text-lg">Công ty FPT Software tạo môi trường làm việc thân thiện, sáng tạo và năng động. Nhân viên được khuyến khích phát triển bản thân, học hỏi công nghệ mới và có cơ hội làm việc toàn cầu. Văn hóa “Chơi mà học – Học mà vui” luôn được đề cao, tạo động lực cho sự phát triển toàn diện cả về chuyên môn lẫn tinh thần.</p>
                 </div>
             </div>
         </section>
 
-        <section id="future-orientation" class="py-16">
-            <h2 class="section-title text-3xl font-bold text-neutral-800 mb-12 text-center">Định Hướng Tương Lai</h2>
+        <section id="muc-tieu-dinh-huong" class="py-16">
+            <h2 class="section-title text-3xl text-neutral-800 mb-10 text-center">Mục Tiêu và Định Hướng Bản Thân</h2>
             <p class="text-center text-lg text-neutral-600 mb-12 max-w-3xl mx-auto">
-                Kỳ kiến tập đã tác động mạnh mẽ đến định hướng nghề nghiệp, củng cố đam mê với ngành phát triển phần mềm và giúp xác định rõ hơn lĩnh vực quan tâm cũng như lộ trình học tập, rèn luyện cụ thể trong tương lai.
+                Phần này trình bày những mục tiêu cá nhân em đặt ra trước chuyến kiến tập, cùng với những định hướng nghề nghiệp và lộ trình học tập cụ thể được hình thành sau khi trải nghiệm thực tế tại doanh nghiệp.
             </p>
-            <div class="card bg-white p-8 rounded-xl shadow-lg">
-                <h3 class="text-2xl font-semibold text-teal-700 mb-6">3.3 Định hướng nghề nghiệp sau kiến tập</h3>
-                <div class="space-y-6">
-                    <div>
-                        <h4 class="text-xl font-semibold text-neutral-800 mb-2">Củng cố đam mê & Xác định lĩnh vực:</h4>
-                        <p>Đam mê với ngành phát triển phần mềm được củng cố. Đặc biệt bị thu hút bởi lĩnh vực <strong>phát triển web (Web Development)</strong>, cụ thể là <strong>lập trình backend</strong>, các quy trình <strong>DevOps</strong> và nền tảng <strong>Cloud</strong>.</p>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-semibold text-neutral-800 mb-3">Lộ trình học tập và rèn luyện:</h4>
-                        <div class="space-y-4 relative pl-8 border-l-2 border-teal-500">
-                            <div class="absolute w-4 h-4 bg-teal-500 rounded-full -left-[9px] top-1 border-2 border-white"></div>
-                            <div class="mb-6">
-                                <h5 class="font-semibold text-teal-600">Năm 2-3 Đại học:</h5>
-                                <p>Tập trung nắm vững kiến thức chuyên ngành cốt lõi: Cấu trúc dữ liệu, OOP, Cơ sở dữ liệu, Mạng máy tính, Lập trình Web (HTML, CSS, JS, một ngôn ngữ backend).</p>
-                            </div>
-                            <div class="absolute w-4 h-4 bg-teal-500 rounded-full -left-[9px] top-1/3 border-2 border-white"></div>
-                            <div class="mb-6">
-                                <h5 class="font-semibold text-teal-600">Năm cuối (Năm 4):</h5>
-                                <p>Thực hiện đồ án tốt nghiệp ứng dụng web hoàn chỉnh (ASP.NET Core hoặc MERN/MEAN Stack). Tìm cơ hội thực tập chuyên sâu.</p>
-                            </div>
-                             <div class="absolute w-4 h-4 bg-teal-500 rounded-full -left-[9px] top-2/3 border-2 border-white"></div>
-                            <div class="mb-6">
-                                <h5 class="font-semibold text-teal-600">Sau khi tốt nghiệp:</h5>
-                                <p>Ứng tuyển vị trí Lập trình viên Web (Backend/Fullstack) hoặc Kỹ sư DevOps tại các công ty uy tín như FPT Software.</p>
-                            </div>
-                            <div class="absolute w-4 h-4 bg-teal-500 rounded-full -left-[9px] bottom-1 border-2 border-white"></div>
-                            <div>
-                                <h5 class="font-semibold text-teal-600">Học tập liên tục:</h5>
-                                <p>Không ngừng học hỏi công nghệ mới, trau dồi tiếng Anh chuyên ngành và kỹ năng mềm.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-semibold text-neutral-800 mb-2">Mở rộng tầm nhìn:</h4>
-                        <p>Duy trì sự quan tâm và tìm hiểu thêm về AI, IoT, Big Data để có cái nhìn tổng thể về ngành CNTT.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="evaluation-proposals" class="py-16 bg-teal-50/50">
-            <h2 class="section-title text-3xl font-bold text-neutral-800 mb-12 text-center">Đánh Giá & Đề Xuất</h2>
-            <p class="text-center text-lg text-neutral-600 mb-12 max-w-3xl mx-auto">
-                Những nhận xét, đánh giá chung về đợt kiến tập, bao gồm những điểm ấn tượng, thuận lợi, khó khăn và các đề xuất, kiến nghị nhằm nâng cao hiệu quả của các chương trình kiến tập trong tương lai.
-            </p>
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="space-y-10 max-w-4xl mx-auto">
                 <div class="card bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-semibold text-teal-700 mb-4">4.1 Đánh giá chung về đợt kiến tập</h3>
-                    <p class="mb-2">Trải nghiệm vô cùng quý giá và ý nghĩa, không chỉ là tham quan mà là cơ hội "chạm tay" vào môi trường làm việc thực tế.</p>
-                    <p><strong>Điểm ấn tượng:</strong> Sự chuyên nghiệp, quy mô của FPT Software; nội dung chia sẻ thực tế, sinh động; văn hóa doanh nghiệp đặc sắc; cơ hội định hướng nghề nghiệp rõ ràng.</p>
-                    <p class="mt-2">Chương trình đáp ứng tốt mục tiêu học tập, đặc biệt về quy trình làm việc, công nghệ mới và định hướng nghề nghiệp.</p>
-                </div>
-                <div class="card bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-semibold text-teal-700 mb-4">4.2 Những thuận lợi và khó khăn</h3>
-                    <p class="mb-2"><strong>Thuận lợi:</strong> Sự đón tiếp nhiệt tình; nội dung chuẩn bị chu đáo; diễn giả có chuyên môn và kỹ năng truyền đạt tốt; môi trường giao lưu cởi mở; sự hỗ trợ từ Khoa và Trường.</p>
-                    <p><strong>Khó khăn và cách khắc phục:</strong></p>
-                    <ul class="list-disc list-inside space-y-1 mt-2 text-sm">
-                        <li>Khoảng cách lý thuyết - thực tế: Tập trung lắng nghe, ghi chép, đặt câu hỏi, tự tìm hiểu thêm.</li>
-                        <li>Khối lượng kiến thức mới lớn: Nắm ý chính, ghi chú điểm cần tìm hiểu sâu.</li>
-                        <li>Bỡ ngỡ ban đầu: Dần làm quen qua quan sát, lắng nghe, chủ động tương tác.</li>
-                        <li>Một số công nghệ còn mới (RPA, Big Data): Hiểu khái niệm cơ bản, tiềm năng ứng dụng.</li>
+                    <h3 class="text-2xl font-semibold text-teal-700 mb-4">Mục tiêu (Trước chuyến kiến tập)</h3>
+                    <p class="text-lg mb-3">Khi tham gia kiến tập tại FPT Software HCM, em đã đặt ra các mục tiêu cụ thể như:</p>
+                    <ul class="list-disc list-inside space-y-2 text-lg">
+                        <li>Tìm hiểu rõ hơn về môi trường làm việc thực tế trong ngành phát triển phần mềm, từ khâu tiếp nhận yêu cầu đến triển khai, kiểm thử và bàn giao sản phẩm.</li>
+                        <li>Tiếp xúc thực tế với các công nghệ và quy trình làm việc hiện đại như Agile/Scrum, từ đó có hình dung rõ ràng hơn về tác phong làm việc chuyên nghiệp.</li>
+                        <li>Tìm kiếm và xác định định hướng nghề nghiệp phù hợp với bản thân, dựa trên quan sát thực tế, trao đổi với các anh/chị kỹ sư và những chia sẻ từ doanh nghiệp.</li>
+                        <li>Phát triển tư duy tích cực, khả năng tự học và tinh thần cầu tiến – những yếu tố quan trọng giúp em chuẩn bị tốt cho sự nghiệp tương lai.</li>
                     </ul>
                 </div>
-            </div>
-            <div class="card bg-white p-8 rounded-xl shadow-lg mt-8">
-                <h3 class="text-2xl font-semibold text-teal-700 mb-4">4.3 Đề xuất và kiến nghị</h3>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div>
-                        <h4 class="font-semibold text-neutral-800">Với Khoa và Nhà trường:</h4>
-                        <ul class="list-disc list-inside space-y-1 mt-2 text-sm">
-                            <li>Tăng cường workshop/seminar chuyên sâu.</li>
-                            <li>Tổ chức kiến tập dạng "mini-project".</li>
-                            <li>Kết nối sớm hơn với doanh nghiệp.</li>
-                            <li>Hỗ trợ sau kiến tập (chia sẻ, định hướng).</li>
-                        </ul>
+                <div class="card bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold text-teal-700 mb-4">Định hướng nghề nghiệp bản thân và Lộ trình học tập (Sau chuyến kiến tập)</h3>
+                    <p class="text-lg mb-3">Thông qua buổi kiến tập, em đã xây dựng được niềm yêu thích đặc biệt với lĩnh vực phát triển web, đặc biệt là trong việc xây dựng các hệ thống quản lý dữ liệu hoặc các ứng dụng dịch vụ. Em rất ấn tượng bởi các phần trình bày về DevOps, nền tảng Cloud và các quy trình CI/CD hiện đại mà FPT Software đang áp dụng trong các dự án thực tế.</p>
+                    <h4 class="text-xl font-semibold text-neutral-800 my-4">Lộ trình học tập dự kiến:</h4>
+                    <div class="relative pl-8 border-l-4 border-teal-200 space-y-8">
+                        <div class="timeline-item relative pl-6">
+                            <h5 class="font-semibold text-teal-600 text-lg">Năm 2 – 3 Đại học:</h5>
+                            <p class="text-lg">Tập trung học các môn cơ sở ngành và chuyên ngành quan trọng như Cấu trúc dữ liệu và giải thuật, Lập trình hướng đối tượng (OOP), Cơ sở dữ liệu, Mạng máy tính, và các môn Lập trình Web (HTML, CSS, JavaScript, làm quen với một framework backend như Node.js, Django hoặc Spring Boot).</p>
+                        </div>
+                        <div class="timeline-item relative pl-6">
+                            <h5 class="font-semibold text-teal-600 text-lg">Năm 4 (Năm cuối):</h5>
+                            <p class="text-lg">Thực hiện đồ án tốt nghiệp tập trung vào xây dựng một hệ thống Web hoàn chỉnh (ví dụ: hệ thống quản lý sinh viên, quản lý tài liệu, hoặc một ứng dụng thương mại điện tử nhỏ) sử dụng các công nghệ như MERN Stack, MEAN Stack hoặc ASP.NET Core. Tìm kiếm cơ hội thực tập chuyên sâu để áp dụng kiến thức.</p>
+                        </div>
+                         <div class="timeline-item relative pl-6">
+                            <h5 class="font-semibold text-teal-600 text-lg">Sau khi ra trường:</h5>
+                            <p class="text-lg">Ứng tuyển vào vị trí Lập trình viên Web (Backend Developer hoặc Fullstack Developer) hoặc Kỹ sư DevOps tại các công ty phần mềm uy tín.</p>
+                        </div>
                     </div>
-                    <div>
-                        <h4 class="font-semibold text-neutral-800">Với FPT Software HCM:</h4>
-                        <ul class="list-disc list-inside space-y-1 mt-2 text-sm">
-                            <li>Tăng cường tương tác thực tế (quan sát dự án).</li>
-                            <li>Chia sẻ thêm về "day-in-the-life" các vị trí.</li>
-                            <li>Cơ hội thực tập sớm cho sinh viên.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-neutral-800">Với sinh viên:</h4>
-                        <ul class="list-disc list-inside space-y-1 mt-2 text-sm">
-                            <li>Chuẩn bị kỹ lưỡng trước kiến tập.</li>
-                            <li>Chủ động, tích cực hỏi và học.</li>
-                            <li>Duy trì tinh thần học hỏi sau kiến tập.</li>
-                        </ul>
-                    </div>
+                    <p class="text-lg mt-4">Mặc dù định hướng là phát triển web, em vẫn sẽ tiếp cận và tìm hiểu các môn học khác như Trí tuệ nhân tạo (AI), Internet of Things (IoT) hoặc Xử lý ảnh để có cái nhìn tổng thể, từ đó có thể phối hợp tốt hơn trong môi trường làm việc đa ngành, đa công nghệ.</p>
                 </div>
+            </div>
+        </section>
+
+        <section id="hoc-hoi-kinh-nghiem" class="py-16 bg-teal-50/50">
+            <h2 class="section-title text-3xl text-neutral-800 mb-10 text-center">Học Hỏi và Kinh Nghiệm</h2>
+            <p class="text-center text-lg text-neutral-600 mb-12 max-w-3xl mx-auto">
+                Trong phần này, em chia sẻ về những trải nghiệm và kiến thức mới đã thu được từ chuyến kiến tập tại FPT Software HCM, bao gồm các hoạt động đã tham gia, những bài học quý báu và kinh nghiệm đáng nhớ.
+            </p>
+            <div class="card bg-white p-8 rounded-xl shadow-lg max-w-4xl mx-auto text-lg leading-relaxed">
+                <p class="mb-4">Kỳ kiến tập tại FPT Software HCM đã mang đến cho em nhiều kiến thức và kinh nghiệm thực tế quý báu:</p>
+                <ul class="list-disc list-inside space-y-3 mb-4">
+                    <li><strong>Tham quan thực tế các dự án tại F-Town:</strong> Được trực tiếp quan sát môi trường làm việc hiện đại, chuyên nghiệp và quy trình hoạt động của các đội dự án.</li>
+                    <li><strong>Lắng nghe chia sẻ từ các kỹ sư phần mềm:</strong> Các anh/chị đã chia sẻ kinh nghiệm thực tiễn từ các dự án quốc tế, quy trình triển khai Agile/Scrum, những khó khăn và cách vượt qua. Điều này giúp em hình dung rõ hơn về công việc thực tế của một lập trình viên.</li>
+                    <li><strong>Tìm hiểu về các vai trò trong dự án:</strong> Hiểu rõ hơn về vai trò và trách nhiệm của Product Owner, Scrum Master, Developer, Tester, Business Analyst (BA) và sự phối hợp giữa các vị trí này để tạo ra một sản phẩm chất lượng.</li>
+                    <li><strong>Tiếp cận các công nghệ và sản phẩm mới:</strong> Được giới thiệu về sản phẩm RPA akaBot và các ứng dụng AI mà FPT đang triển khai, cũng như các khái niệm về DevOps, Cloud Computing. Điều này mở rộng tầm nhìn của em về các xu hướng công nghệ hiện tại và tương lai.</li>
+                    <li><strong>Nhận thức về tầm quan trọng của kỹ năng mềm:</strong> Qua quan sát và trao đổi, em hiểu rằng bên cạnh kiến thức chuyên môn, các kỹ năng mềm như giao tiếp, làm việc nhóm, quản lý thời gian và khả năng tự học là vô cùng quan trọng để thành công trong ngành CNTT.</li>
+                </ul>
+                <p>Những bài học này không chỉ giúp em củng cố kiến thức đã học mà còn trang bị thêm những hiểu biết thực tế, tạo nền tảng vững chắc cho định hướng nghề nghiệp sau này. Em nhận ra rằng ngành công nghiệp phần mềm đòi hỏi sự học hỏi không ngừng và khả năng thích ứng nhanh chóng với sự thay đổi của công nghệ.</p>
+            </div>
+        </section>
+
+        <section id="thach-thuc" class="py-16">
+            <h2 class="section-title text-3xl text-neutral-800 mb-10 text-center">Những Thách Thức</h2>
+            <p class="text-center text-lg text-neutral-600 mb-12 max-w-3xl mx-auto">
+                Phần này đề cập đến những thách thức mà em nhận thấy khi quan sát môi trường làm việc thực tế của doanh nghiệp cũng như những khó khăn cá nhân trong quá trình tiếp thu kiến thức mới.
+            </p>
+            <div class="card bg-white p-8 rounded-xl shadow-lg max-w-4xl mx-auto text-lg leading-relaxed">
+                <p class="mb-4">Trong quá trình kiến tập, bên cạnh những kiến thức và kinh nghiệm quý báu, em cũng nhận thấy một số thách thức đối với bản thân và sinh viên nói chung khi bước đầu tiếp cận môi trường doanh nghiệp:</p>
+                <ul class="list-disc list-inside space-y-3">
+                    <li><strong>Khoảng cách giữa lý thuyết và thực tế:</strong> Kiến thức được học trên giảng đường đôi khi có sự khác biệt lớn so với việc áp dụng vào các dự án thực tế với quy mô và độ phức tạp cao. Điều này đòi hỏi sinh viên cần có khả năng tự học và thích ứng nhanh để bắt kịp.</li>
+                    <li><strong>Khối lượng công nghệ mới và đa dạng:</strong> Ngành CNTT phát triển rất nhanh, với vô số công nghệ, framework và công cụ mới ra đời liên tục. Việc phải tiếp thu một lượng lớn thông tin trong thời gian ngắn là một thách thức không nhỏ.</li>
+                    <li><strong>Định hướng nghề nghiệp ban đầu còn mơ hồ:</strong> Nhiều sinh viên, bao gồm cả em trước đây, có thể cảm thấy bỡ ngỡ và chưa thực sự chắc chắn về con đường sự nghiệp cụ thể mình muốn theo đuổi. Việc trải nghiệm thực tế là cần thiết nhưng cũng cần thời gian để thực sự "thẩm thấu" và đưa ra lựa chọn.</li>
+                    <li><strong>Hiểu biết hạn chế về một số công nghệ chuyên sâu:</strong> Các công nghệ như RPA, Big Data, hay Blockchain còn khá mới mẻ với nhiều sinh viên, do đó việc hình dung ngay các ứng dụng thực tiễn và chiều sâu kỹ thuật của chúng có thể gặp khó khăn.</li>
+                    <li><strong>Sự bỡ ngỡ ban đầu khi tham quan và tương tác:</strong> Việc lần đầu tiên bước vào một môi trường doanh nghiệp lớn, chuyên nghiệp có thể gây ra cảm giác e dè, làm giảm khả năng chủ động đặt câu hỏi và tương tác. Tuy nhiên, em đã dần khắc phục bằng cách tập trung lắng nghe, ghi chép và mạnh dạn hơn trong giao tiếp.</li>
+                </ul>
+                <p class="mt-4">Việc nhận diện những thách thức này giúp em ý thức hơn về những gì cần cải thiện và chuẩn bị kỹ lưỡng hơn cho tương lai.</p>
+            </div>
+        </section>
+
+        <section id="de-xuat" class="py-16 bg-teal-50/50">
+            <h2 class="section-title text-3xl text-neutral-800 mb-10 text-center">Đề Xuất Tương Lai</h2>
+            <p class="text-center text-lg text-neutral-600 mb-12 max-w-3xl mx-auto">
+                Dựa trên những trải nghiệm thực tế, em xin đưa ra một số ý kiến và đề xuất nhằm cải thiện và tối ưu hóa hơn nữa các chương trình kiến tập, giúp sinh viên có được những lợi ích thiết thực nhất.
+            </p>
+            <div class="card bg-white p-8 rounded-xl shadow-lg max-w-4xl mx-auto text-lg leading-relaxed">
+                <p class="mb-4">Để nâng cao hiệu quả của các chương trình kiến tập và giúp sinh viên có sự chuẩn bị tốt hơn cho nghề nghiệp tương lai, em xin có một vài đề xuất:</p>
+                <ul class="list-disc list-inside space-y-3">
+                    <li><strong>Tổ chức kiến tập dưới dạng "mini-project" hoặc workshop thực hành:</strong> Thay vì chỉ tham quan và nghe giới thiệu, việc cho sinh viên tham gia vào một dự án giả lập nhỏ hoặc một buổi workshop thực hành (ví dụ: code một chức năng đơn giản, thiết kế một quy trình cơ bản) sẽ giúp các em hình dung rõ hơn về vòng đời dự án và áp dụng kiến thức đã học.</li>
+                    <li><strong>Tăng cường các buổi chia sẻ chuyên sâu (deep-dive seminars):</strong> Ngoài các buổi giới thiệu tổng quan, có thể tổ chức thêm các buổi nói chuyện chuyên sâu hơn về một số công nghệ hoặc quy trình cụ thể đang là xu hướng, do chính các chuyên gia kỹ thuật của công ty chia sẻ.</li>
+                    <li><strong>Chương trình "Mentor - Mentee" ngắn hạn:</strong> Kết nối sinh viên với các anh/chị nhân viên có kinh nghiệm trong công ty để có những buổi trao đổi, định hướng cụ thể hơn sau chuyến kiến tập.</li>
+                    <li><strong>Cung cấp tài liệu tham khảo trước và sau kiến tập:</strong> Gửi trước cho sinh viên một số thông tin tổng quan về công ty, các lĩnh vực hoạt động hoặc các công nghệ sẽ được giới thiệu để các em có sự chuẩn bị tốt hơn. Sau chuyến đi, có thể chia sẻ thêm các tài liệu liên quan hoặc các nguồn học liệu hữu ích.</li>
+                    <li><strong>Tạo diễn đàn trao đổi sau kiến tập:</strong> Một diễn đàn (online hoặc offline) để sinh viên có thể tiếp tục đặt câu hỏi, chia sẻ kinh nghiệm và nhận được sự hỗ trợ từ phía nhà trường và doanh nghiệp sau khi chương trình kiến tập kết thúc.</li>
+                </ul>
+                <p class="mt-4">Em tin rằng những cải tiến này sẽ giúp các chương trình kiến tập trở nên thực chất hơn, mang lại giá trị cao hơn cho sinh viên.</p>
+            </div>
+        </section>
+
+        <section id="phan-hoi-danh-gia" class="py-16">
+            <h2 class="section-title text-3xl text-neutral-800 mb-10 text-center">Phản Hồi và Đánh Giá</h2>
+             <p class="text-center text-lg text-neutral-600 mb-12 max-w-3xl mx-auto">
+                Đây là những suy nghĩ và đánh giá của em về chương trình kiến tập tại Công ty FPT Software HCM, một trải nghiệm quý giá và vượt xa mong đợi.
+            </p>
+            <div class="card bg-white p-8 rounded-xl shadow-lg max-w-4xl mx-auto text-lg leading-relaxed">
+                <p class="mb-4">Chuyến kiến tập tại FPT Software TP. Hồ Chí Minh là một trải nghiệm vô cùng quý giá, vượt xa một buổi tham quan thông thường. Đây thực sự là cơ hội để em “chạm tay” vào môi trường làm việc thực tế – nơi những kiến thức sách vở được vận hành bằng quy trình chuyên nghiệp, bằng tinh thần làm việc nghiêm túc và đổi mới không ngừng.</p>
+                <p class="mb-4">Em ấn tượng nhất với các chuyên đề về Agile/Scrum, DevOps, và các sản phẩm công nghệ như akaBot cùng những ứng dụng chuyển đổi số mà công ty đang triển khai. Cách truyền đạt của các anh/chị kỹ sư không chỉ sinh động mà còn rất gần gũi, mang lại cảm giác rằng, chỉ cần đủ đam mê và nỗ lực, sinh viên như em hoàn toàn có thể vươn tới những vị trí và thành tựu đó.</p>
+                <p class="mb-4">Không khí trong suốt buổi kiến tập rất cởi mở và thân thiện. Em được trực tiếp đặt câu hỏi, được tham quan các khu văn phòng hiện đại, và trên hết là được truyền cảm hứng mạnh mẽ. Điều quý giá nhất em học được không chỉ là kiến thức công nghệ, mà là cách FPT Software xây dựng và duy trì một văn hoá học tập, sáng tạo và luôn hướng tới tương lai.</p>
+                <p>Qua chuyến đi này, em nhận ra mình thực sự phù hợp với hướng phát triển phần mềm, đặc biệt là trong lĩnh vực thiết kế hệ thống và lập trình backend. Trước đây, định hướng của em có phần mơ hồ, nhưng nay em có thể tự tin khẳng định rằng: “Đây chính là con đường mà em muốn theo đuổi và cống hiến”.</p>
             </div>
         </section>
         
-        <section id="conclusion" class="py-16 text-center">
-             <h2 class="section-title text-3xl font-bold text-neutral-800 mb-8">Lời Cảm Ơn & Kết Luận</h2>
-             <div class="max-w-3xl mx-auto">
-                <p class="text-lg text-neutral-600 mb-6">
-                    Kỳ kiến tập tại FPT Software HCM đã mang lại những trải nghiệm vô giá và bài học thực tiễn sâu sắc. Em đã hiểu rõ hơn về quy trình phát triển phần mềm, các công nghệ xu thế và được truyền cảm hứng từ sự chuyên nghiệp, nhiệt huyết của đội ngũ FPT Software. Chuyến đi này đóng vai trò then chốt trong việc củng cố định hướng nghề nghiệp, tiếp thêm động lực để em tiếp tục nỗ lực học tập và rèn luyện.
-                </p>
-                <p class="text-lg text-neutral-600 mb-6">
-                    Em xin chân thành cảm ơn Ban Giám hiệu Trường Đại học Lạc Hồng, Khoa Công nghệ Thông tin, Ban Lãnh đạo và các anh/chị tại FPT Software HCM đã tạo điều kiện và tận tình hướng dẫn. Cảm ơn gia đình và bạn bè đã luôn động viên.
-                </p>
-                <p class="text-md font-semibold text-teal-700">Nguyễn Trung Tiến</p>
-             </div>
+        <section id="ket-luan" class="py-16 bg-teal-50/50">
+            <h2 class="section-title text-3xl text-neutral-800 mb-10 text-center">Kết Luận</h2>
+            <p class="text-center text-lg text-neutral-600 mb-12 max-w-3xl mx-auto">
+                Tóm lại, chuyến kiến tập lần này không chỉ là một điểm sáng trong học kỳ mà còn là một bước ngoặt quan trọng giúp em xác định rõ hơn con đường nghề nghiệp, tiếp thêm động lực, niềm tin và khát khao cháy bỏng để học tập và phát triển trong lĩnh vực Công nghệ Thông tin.
+            </p>
+            <div class="card bg-white p-8 rounded-xl shadow-lg max-w-4xl mx-auto text-lg leading-relaxed">
+                <p class="mb-4">Sau đợt kiến tập tại Công ty TNHH Phần mềm FPT – Chi nhánh TP. Hồ Chí Minh, em đã rút ra được rất nhiều bài học quý báu và có được cái nhìn sâu sắc hơn về ngành công nghiệp phần mềm. Em nhận thức rõ hơn về tầm quan trọng của việc áp dụng kiến thức lý thuyết vào thực tiễn, cũng như sự cần thiết của tư duy làm việc chuyên nghiệp và các kỹ năng mềm.</p>
+                <p class="mb-4">Chuyến đi đã giúp em hiểu sâu hơn về bản chất của quy trình Agile/Scrum và cách thức áp dụng hiệu quả trong các dự án thực tế. Em cũng được tiếp cận với các xu thế công nghệ mới như DevOps, Cloud Computing, AI, và Blockchain, từ đó mở rộng tầm nhìn và định hướng học tập cho bản thân.</p>
+                <p>Quan trọng nhất, kỳ kiến tập này đã giúp em tự định hướng nghề nghiệp một cách rõ ràng hơn, dựa trên khả năng, sở thích cá nhân và những gì đã quan sát, học hỏi được. Chuyến đi thực tế tại FPT Software HCM không chỉ giúp em hiểu sâu thêm về môi trường làm việc chuyên nghiệp, cách thức hoạt động của một công ty phần mềm hàng đầu, mà qua đó còn tiếp thêm động lực mạnh mẽ để em theo đuổi đam mê với ngành Công nghệ Thông tin.</p>
+            </div>
         </section>
     </main>
 
-    <footer class="bg-neutral-800 text-neutral-300 py-8 text-center">
-        <p>&copy; 2025 Nguyễn Trung Tiến - Báo cáo kiến tập FPT Software HCM.</p>
-        <p class="text-sm">Trường Đại học Lạc Hồng - Khoa Công nghệ Thông tin.</p>
+    <footer class="bg-neutral-900 text-neutral-300 py-10 text-center mt-16">
+        <p class="mb-2">&copy; 2025 Nguyễn Trung Tiến - Báo cáo kiến tập FPT Software HCM.</p>
+        <p class="text-sm">Khoa Công nghệ Thông tin - Trường Đại học Lạc Hồng.</p>
     </footer>
 
     <script>
@@ -442,9 +326,11 @@
 
             if (mobileMenuButton && mobileMenu) {
                 mobileMenuButton.addEventListener('click', () => {
+                    const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+                    mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
                     mobileMenu.classList.toggle('hidden');
-                    const iconOpen = mobileMenuButton.querySelector('svg:first-child');
-                    const iconClose = mobileMenuButton.querySelector('svg:last-child');
+                    const iconOpen = mobileMenuButton.querySelector('svg:nth-child(1)');
+                    const iconClose = mobileMenuButton.querySelector('svg:nth-child(2)');
                     iconOpen.classList.toggle('hidden');
                     iconClose.classList.toggle('hidden');
                 });
@@ -454,35 +340,56 @@
                 link.addEventListener('click', function() {
                     if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                          mobileMenu.classList.add('hidden');
-                         const iconOpen = mobileMenuButton.querySelector('svg:first-child');
-                         const iconClose = mobileMenuButton.querySelector('svg:last-child');
+                         mobileMenuButton.setAttribute('aria-expanded', 'false');
+                         const iconOpen = mobileMenuButton.querySelector('svg:nth-child(1)');
+                         const iconClose = mobileMenuButton.querySelector('svg:nth-child(2)');
                          iconOpen.classList.remove('hidden');
                          iconClose.classList.add('hidden');
+                    }
+                    // For desktop, ensure smooth scroll and active state update
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                         // Smooth scroll handled by CSS, direct jump for JS fallback or if needed
                     }
                 });
             });
 
             function updateActiveLink() {
-                let currentSectionId = 'home';
+                let currentSectionId = 'trang-bia'; // Default to top section
+                const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
                 sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                    const sectionTop = section.offsetTop - 100; // Adjusted for sticky header
+                    const sectionHeight = section.offsetHeight;
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                         currentSectionId = section.getAttribute('id');
                     }
                 });
+                 // Special case for the first section if at the very top
+                if (scrollPosition < sections[0].offsetTop - 100) {
+                    currentSectionId = 'trang-bia';
+                }
+
 
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    const href = link.getAttribute('href');
+                    if (href && href.substring(1) === currentSectionId) {
                         link.classList.add('active');
                     }
                 });
+                 // Handle 'Trang Bìa' separately as it's not in the main nav items for active state
+                const homeNavLink = document.querySelector('header a[href="#trang-bia"]');
+                if (homeNavLink) {
+                    if (currentSectionId === 'trang-bia') {
+                        // Optionally style the main brand/logo link if it's for home
+                    }
+                }
             }
             
             window.addEventListener('scroll', updateActiveLink);
-            updateActiveLink();
-
+            updateActiveLink(); // Initial call
 
             const employeeChartCanvas = document.getElementById('employeeChart');
             if (employeeChartCanvas) {
@@ -492,47 +399,21 @@
                         labels: ['FPT Software Toàn Cầu', 'FPT Software HCM'],
                         datasets: [{
                             label: 'Số lượng nhân viên (ước tính)',
-                            data: [27000, 4000],
-                            backgroundColor: [
-                                'rgba(13, 148, 136, 0.6)', 
-                                'rgba(20, 83, 45, 0.6)'    
-                            ],
-                            borderColor: [
-                                'rgba(13, 148, 136, 1)',
-                                'rgba(20, 83, 45, 1)'
-                            ],
+                            data: [27000, 4000], // Data from original report
+                            backgroundColor: ['rgba(13, 148, 136, 0.7)', 'rgba(20, 83, 45, 0.7)'],
+                            borderColor: ['rgba(13, 148, 136, 1)', 'rgba(20, 83, 45, 1)'],
                             borderWidth: 1
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    callback: function(value) {
-                                        return value.toLocaleString('vi-VN');
-                                    }
-                                }
-                            }
-                        },
+                        scales: { y: { beginAtZero: true, ticks: { callback: value => value.toLocaleString('vi-VN') } } },
                         plugins: {
-                            legend: {
-                                display: false
-                            },
+                            legend: { display: false },
                             tooltip: {
                                 callbacks: {
-                                    label: function(context) {
-                                        let label = context.dataset.label || '';
-                                        if (label) {
-                                            label += ': ';
-                                        }
-                                        if (context.parsed.y !== null) {
-                                            label += context.parsed.y.toLocaleString('vi-VN') + ' nhân viên';
-                                        }
-                                        return label;
-                                    }
+                                    label: context => `${context.dataset.label || ''}: ${context.parsed.y.toLocaleString('vi-VN')} nhân viên`
                                 }
                             }
                         }
@@ -543,56 +424,20 @@
             const accordionHeaders = document.querySelectorAll('.accordion-header');
             accordionHeaders.forEach(header => {
                 header.addEventListener('click', () => {
-                    const accordionItem = header.parentElement;
                     const accordionContent = header.nextElementSibling;
-                    const accordionIcon = header.querySelector('svg');
-
-                    // Close other open accordions
-                    document.querySelectorAll('.accordion-item').forEach(item => {
-                        if (item !== accordionItem && item.classList.contains('open')) {
-                            item.classList.remove('open');
-                            item.querySelector('.accordion-content').style.maxHeight = null;
-                            item.querySelector('.accordion-header svg').classList.remove('rotate-180');
-                        }
-                    });
+                    const isOpen = accordionContent.style.maxHeight && accordionContent.style.maxHeight !== '0px';
                     
-                    accordionItem.classList.toggle('open');
-                    if (accordionContent.style.maxHeight) {
+                    // Close all other accordions in the same group if needed
+                    // For now, individual toggle
+                    if (isOpen) {
                         accordionContent.style.maxHeight = null;
-                        accordionIcon.classList.remove('rotate-180');
+                        header.querySelector('svg')?.classList.remove('rotate-180');
                     } else {
                         accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
-                        accordionIcon.classList.add('rotate-180');
+                        header.querySelector('svg')?.classList.add('rotate-180');
                     }
                 });
             });
-
-            const techCards = document.querySelectorAll('.tech-card');
-            const modal = document.getElementById('tech-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalDetails = document.getElementById('modal-details');
-            const closeModalButton = document.getElementById('close-modal-button');
-
-            techCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    const title = card.querySelector('h4').innerText;
-                    const details = card.dataset.techDetails;
-                    modalTitle.innerText = title;
-                    modalDetails.innerText = details;
-                    modal.classList.remove('hidden');
-                });
-            });
-
-            if (closeModalButton && modal) {
-                closeModalButton.addEventListener('click', () => {
-                    modal.classList.add('hidden');
-                });
-                modal.addEventListener('click', (event) => {
-                    if (event.target === modal) {
-                        modal.classList.add('hidden');
-                    }
-                });
-            }
         });
     </script>
 </body>
